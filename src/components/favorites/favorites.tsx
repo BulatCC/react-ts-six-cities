@@ -16,7 +16,6 @@ function Favorites({favoriteData}: FavoriteProps): JSX.Element {
     const cityOffers:CityOffers = {};
     const favorites = [];
 
-
     favoriteData.forEach(favorite => {
       if (!checkKeyValue(cityOffers, favorite.city.name)) {
         cityOffers[favorite.city.name] = [favorite];

@@ -1,16 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+// import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import {reducer} from './store/reducer';
 import App from './components/app/app';
-import {offers} from './mocks/offers';
 
-const Setting = {
-  OFFERS_COUNT: 124,
-};
+const store = createStore(
+  reducer,
+  composeWithDevTools(),
+);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.render(
   <React.StrictMode>
-    <App
-      offersCount={Setting.OFFERS_COUNT}
-      offers={offers}
-    />
-  </React.StrictMode>);
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root'));
+
+

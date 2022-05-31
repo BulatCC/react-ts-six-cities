@@ -41,6 +41,4 @@ export type SortedData = {
   data: Offer[],
 };
 
-export type CityOffers = {
-  [index: string]: Offer[];
-}
+export type CityOffers = Record<string, Offer[]>;

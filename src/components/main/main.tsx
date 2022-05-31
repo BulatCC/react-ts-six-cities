@@ -1,84 +1,46 @@
+
+import { Dispatch } from 'redux';
+import { connect, ConnectedProps } from 'react-redux';
 import Header from '../header/header';
-import OffersList from '../offers-list/offers-list';
-import {Offer} from '../../types/offers';
+import MainOffers from '../main-offers/main-offers';
+import MainEmpty from '../main-empty/main-empty';
+import LocationsList from '../locations-list/locations-list';
+import { Offer } from '../../types/offers';
+import { State } from '../../types/state';
 
 type MainProps = {
-  offersCount: number;
   offers: Offer[];
+  selectedCity: string;
 }
 
-function Main({ offersCount, offers }: MainProps): JSX.Element {
+const mapStateToProps = ({ defaultOffers, selectedCity }: State) => ({
+  offers: defaultOffers,
+  selectedCity
+});
+
+const connector = connect(mapStateToProps);
+function Main({ offers, selectedCity }: MainProps): JSX.Element {
+  const offersInCity = offers.filter(offer => offer.city.name === selectedCity);
+
   return (
-    <div className="page page--gray page--main">
+    <div className={`page page--gray page--main ${offersInCity.length === 0 ? 'page__main--index-empty' : ''} `}>
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <LocationsList />
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0} >
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <OffersList offers={offers}/>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
+          {offersInCity.length ?
+            <MainOffers offersInCity={offersInCity} selectedCity={selectedCity} /> :
+            <MainEmpty />}
         </div>
       </main>
     </div>
   );
 }
 
-export default Main;
+export { Main };
+export default connector(Main);
