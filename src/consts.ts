@@ -19,6 +19,14 @@ export enum CityNames {
   AMSTERDAM = 'Amsterdam',
   HAMBURG = 'Hamburg',
   DUSSELDORF = 'Dusseldorf',
-};
+}
 
 export const appCityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum ApiRoute {
+  offers = 'hotels',
+  favorite = 'favorite',
+  comments = 'comments',
+  login = 'login',
+  logout = 'logout',
+}

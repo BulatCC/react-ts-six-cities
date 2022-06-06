@@ -5,18 +5,18 @@ type FavoriteProps = {
   favoriteData: Offer[];
 }
 
-function Favorites({favoriteData}: FavoriteProps): JSX.Element {
-  const checkKeyValue = (obj: {}, value: string) => {
+function Favorites({ favoriteData }: FavoriteProps): JSX.Element {
+  const checkKeyValue = (obj: Record<string, Offer[]>, value: string) => {
     let isTrue;
-    Object.keys(obj).forEach(key => key === value ? isTrue = true : isTrue = false);
+    Object.keys(obj).forEach((key) => key === value ? isTrue = true : isTrue = false);
     return isTrue;
-  }
+  };
 
-  const getSortedData = (favoriteData: Offer[]): SortedData[] => {
-    const cityOffers:CityOffers = {};
+  const getSortedData = (favoriteOffers: Offer[]): SortedData[] => {
+    const cityOffers: CityOffers = {};
     const favorites = [];
 
-    favoriteData.forEach(favorite => {
+    favoriteOffers.forEach((favorite) => {
       if (!checkKeyValue(cityOffers, favorite.city.name)) {
         cityOffers[favorite.city.name] = [favorite];
       } else {
@@ -24,7 +24,7 @@ function Favorites({favoriteData}: FavoriteProps): JSX.Element {
       }
     });
 
-    for (let city in cityOffers) {
+    for (const city in cityOffers) {
       favorites.push({
         cityName: city,
         data: cityOffers[city],
@@ -42,18 +42,17 @@ function Favorites({favoriteData}: FavoriteProps): JSX.Element {
     });
 
     return favorites;
-  }
+  };
 
-  const sortedData = getSortedData(favoriteData)
+  const sortedData = getSortedData(favoriteData);
 
   return (
     <main className="page__main page__main--favorites">
-    <div className="page__favorites-container container">
-      <section className="favorites">
-        <h1 className="favorites__title">Saved listing</h1>
-        <ul className="favorites__list">
-          {sortedData.map(offer => {
-            return (
+      <div className="page__favorites-container container">
+        <section className="favorites">
+          <h1 className="favorites__title">Saved listing</h1>
+          <ul className="favorites__list">
+            {sortedData.map((offer) => (
               <li className="favorites__locations-items" key={offer.cityName}>
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
@@ -63,18 +62,16 @@ function Favorites({favoriteData}: FavoriteProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {offer.data.map((offer) => <FavoriteCard key={offer.id} offer={offer} />)}
+                  {offer.data.map((offerData) => <FavoriteCard key={offerData.id} offer={offerData} />)}
                 </div>
               </li>
-            )
-          })
-          }
-        </ul>
-      </section>
-    </div>
-  </main>
-  )
-
+            ),
+            )}
+          </ul>
+        </section>
+      </div>
+    </main>
+  );
 }
 
 export default Favorites;

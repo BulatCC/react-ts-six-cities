@@ -5,22 +5,25 @@ import Header from '../header/header';
 import MainOffers from '../main-offers/main-offers';
 import MainEmpty from '../main-empty/main-empty';
 import LocationsList from '../locations-list/locations-list';
+import Loader from '../loader/loader';
 import { Offer } from '../../types/offers';
 import { State } from '../../types/state';
 
 type MainProps = {
   offers: Offer[];
   selectedCity: string;
+  isDataLoaded: boolean;
 }
 
-const mapStateToProps = ({ defaultOffers, selectedCity }: State) => ({
+const mapStateToProps = ({ defaultOffers, selectedCity, isDataLoaded }: State) => ({
   offers: defaultOffers,
-  selectedCity
+  selectedCity,
+  isDataLoaded,
 });
 
 const connector = connect(mapStateToProps);
-function Main({ offers, selectedCity }: MainProps): JSX.Element {
-  const offersInCity = offers.filter(offer => offer.city.name === selectedCity);
+function Main({ offers, selectedCity, isDataLoaded }: MainProps): JSX.Element {
+  const offersInCity = offers.filter((offer) => offer.city.name === selectedCity);
 
   return (
     <div className={`page page--gray page--main ${offersInCity.length === 0 ? 'page__main--index-empty' : ''} `}>
@@ -32,11 +35,13 @@ function Main({ offers, selectedCity }: MainProps): JSX.Element {
             <LocationsList />
           </section>
         </div>
-        <div className="cities">
-          {offersInCity.length ?
-            <MainOffers offersInCity={offersInCity} selectedCity={selectedCity} /> :
-            <MainEmpty />}
-        </div>
+        {isDataLoaded ?
+          <div className="cities">
+            {offersInCity.length ?
+              <MainOffers offersInCity={offersInCity} selectedCity={selectedCity} /> :
+              <MainEmpty />}
+          </div>
+          : <Loader />}
       </main>
     </div>
   );

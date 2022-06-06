@@ -9,13 +9,13 @@ type OffersListProps = {
 function OffersList({offers, handleHoveredCard}: OffersListProps): JSX.Element {
   const handleCardHover = (id: number):void => {
     handleHoveredCard(id);
-  }
+  };
 
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => <OfferCard key={offer.id} offer={offer} handleCardHover={handleCardHover} />)}
     </div>
-  )
+  );
 }
 
 export default OffersList;

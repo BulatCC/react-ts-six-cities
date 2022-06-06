@@ -6,7 +6,7 @@ import { Offer } from '../../types/offers';
 import { State } from '../../types/state';
 
 const mapStateToProps = ({defaultOffers}: State) => ({
-  offers: defaultOffers
+  offers: defaultOffers,
 });
 
 const connector = connect(mapStateToProps);
@@ -16,7 +16,7 @@ type FavoritePageProps = {
 }
 
 function FavoritePage({ offers }: FavoritePageProps): JSX.Element {
-  const favoriteData = offers.filter(offer => offer.isFavorite);
+  const favoriteData = offers.filter((offer) => offer.isFavorite);
 
   return (
     <div className={`page ${favoriteData.length ? '' : 'page--favorites-empty'}`}>

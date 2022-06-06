@@ -1,4 +1,4 @@
-import {useState, ChangeEvent} from 'react';
+import { useState, ChangeEvent } from 'react';
 
 function ReviewForm(): JSX.Element {
   const [review, setreview] = useState({
@@ -6,12 +6,12 @@ function ReviewForm(): JSX.Element {
     review: '',
   });
 
-const hadleFormChange = ({target}: ChangeEvent<HTMLTextAreaElement | HTMLInputElement >):void => {
-  setreview({
-    ...review,
-    [target.name]: target.value
-  });
-}
+  const hadleFormChange = ({ target }: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void => {
+    setreview({
+      ...review,
+      [target.name]: target.value,
+    });
+  };
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -60,7 +60,7 @@ const hadleFormChange = ({target}: ChangeEvent<HTMLTextAreaElement | HTMLInputEl
         <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
       </div>
     </form>
-  )
+  );
 }
 
 export default ReviewForm;

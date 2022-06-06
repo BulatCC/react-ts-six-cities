@@ -18,7 +18,7 @@ function FavoritesEmpty(): JSX.Element {
         </a>
       </footer>
     </div>
-  )
+  );
 }
 
 export default FavoritesEmpty;

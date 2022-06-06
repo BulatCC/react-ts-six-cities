@@ -1,8 +1,8 @@
 import { connect, ConnectedProps } from 'react-redux';
-import {Dispatch} from 'redux';
+import { Dispatch } from 'redux';
 import { State } from '../../types/state';
-import {сhangeSelectedCity, Actions} from '../../store/actions';
-import {appCityNames} from '../../consts';
+import { сhangeSelectedCity, Actions } from '../../store/actions';
+import { appCityNames } from '../../consts';
 
 type LocationsListProps = {
   selectedCity: string;
@@ -14,27 +14,27 @@ const mapStateToProps = ({ selectedCity }: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  handleCityClick (city: string) {
+  handleCityClick(city: string) {
     dispatch(сhangeSelectedCity(city));
-  }
+  },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-function LocationLists({selectedCity, handleCityClick }: LocationsListProps): JSX.Element {
+function LocationLists({ selectedCity, handleCityClick }: LocationsListProps): JSX.Element {
 
   return (
     <ul className="locations__list tabs__list">
-      {appCityNames.map(city => (
+      {appCityNames.map((city) => (
         <li className="locations__item" key={city}>
-          <a className={`locations__item-link tabs__item ${city === selectedCity ? 'tabs__item--active' : '' }`} href="#" onClick={(evt) => {
+          <a className={`locations__item-link tabs__item ${city === selectedCity ? 'tabs__item--active' : ''}`} href="#" onClick={(evt) => {
             evt.preventDefault();
-            handleCityClick(city)
+            handleCityClick(city);
           }}>
             <span>{city}</span>
           </a>
         </li>
-      )
+      ),
       )}
     </ul>
   );

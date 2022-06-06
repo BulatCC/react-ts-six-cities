@@ -2,7 +2,7 @@ import {Offer} from '../types/offers';
 
 export enum ActionType {
   ChangeSelectedCity = 'ChangeSelectedCity',
-  GetAllOffers = 'GetAllOffers',
+  LoadOffers = 'LoadOffers',
 }
 
 export const сhangeSelectedCity = (city: string) => ({
@@ -10,11 +10,11 @@ export const сhangeSelectedCity = (city: string) => ({
   payload: city,
 } as const);
 
-export const getAllOffers = (offers: Offer[]) => ({
-  type: ActionType.GetAllOffers,
+export const loadOffers = (offers: Offer[]) => ({
+  type: ActionType.LoadOffers,
   payload: offers,
 } as const);
 
 export type Actions =
   | ReturnType<typeof сhangeSelectedCity>
-  | ReturnType<typeof getAllOffers>
+  | ReturnType<typeof loadOffers>

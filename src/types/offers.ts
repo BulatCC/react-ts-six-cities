@@ -1,10 +1,11 @@
 export type OfferCard = {
-  isFavorite: boolean;
+  isFavorite?: boolean;
+  isPremium?: boolean;
   price: number;
   title: string;
   type: string;
   rating: number;
-  previewImage: string;
+  previewImage?: string;
   id: number;
 };
 
@@ -18,7 +19,6 @@ export type Offer = OfferCard & {
     }
   },
   images: string[],
-  isPremium: boolean,
   bedrooms: number,
   maxAdults: number,
   goods: string[],
@@ -34,6 +34,12 @@ export type Offer = OfferCard & {
       longitude: number,
       zoom: number
   },
+}
+
+export type OfferBackend = Offer & {
+  preview_image?: string,
+  is_premium?: boolean,
+  is_favorite?: boolean,
 }
 
 export type SortedData = {

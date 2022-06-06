@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useState, useRef } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { Map, TileLayer } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Location } from '../types/map';
