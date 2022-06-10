@@ -1,51 +1,33 @@
 import Header from '../header/header';
+import { NavLink } from 'react-router-dom';
+import { AppRoute } from '../../consts';
 
 function NotFound(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
-        <h1 style={{
+        <div style={{
           margin: 'auto',
         }}
-        >Страница не найдена
-        </h1>
+        >
+          <h1>Страница не найдена
+          </h1>
+          <NavLink to={AppRoute.Root} style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+          }}
+          >
+            <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" style={{
+              marginRight: '20px',
+            }}
+            />
+            На главную
+          </NavLink>
+        </div>
+
       </main>
     </div>
   );

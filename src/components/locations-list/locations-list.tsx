@@ -1,4 +1,4 @@
-import { connect, ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { State } from '../../types/state';
 import { сhangeSelectedCity, Actions } from '../../store/actions';
@@ -30,8 +30,8 @@ function LocationLists({ selectedCity, handleCityClick }: LocationsListProps): J
           <a className={`locations__item-link tabs__item ${city === selectedCity ? 'tabs__item--active' : ''}`} href="#" onClick={(evt) => {
             evt.preventDefault();
             handleCityClick(city);
-          }}>
-            <span>{city}</span>
+          }}
+          ><span>{city}</span>
           </a>
         </li>
       ),

@@ -1,13 +1,20 @@
 export type OfferCard = {
-  isFavorite?: boolean;
-  isPremium?: boolean;
-  price: number;
-  title: string;
-  type: string;
-  rating: number;
-  previewImage?: string;
-  id: number;
+  isFavorite: boolean,
+  isPremium: boolean,
+  price: number,
+  title: string,
+  type: string,
+  rating: number,
+  previewImage: string,
+  id: number,
 };
+
+export type User = {
+  id: number,
+  name: string,
+  isPro: boolean,
+  avatarUrl: string
+}
 
 export type Offer = OfferCard & {
   city: {
@@ -15,31 +22,20 @@ export type Offer = OfferCard & {
     location: {
       latitude: number,
       longitude: number,
-      zoom: number
+      zoom: number,
     }
   },
   images: string[],
   bedrooms: number,
   maxAdults: number,
   goods: string[],
-  host: {
-      id: number,
-      name: string,
-      isPro: boolean,
-      avatarUrl: string
-  },
+  host: User,
   description: string,
   location: {
-      latitude: number,
-      longitude: number,
-      zoom: number
+    latitude: number,
+    longitude: number,
+    zoom: number
   },
-}
-
-export type OfferBackend = Offer & {
-  preview_image?: string,
-  is_premium?: boolean,
-  is_favorite?: boolean,
 }
 
 export type SortedData = {

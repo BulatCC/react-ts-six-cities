@@ -1,21 +1,22 @@
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../consts';
-import { convertRating } from '../../utils/utils';
+import { convertRating } from '../../services/utils';
 import { OfferCard } from '../../types/offers';
 
 type CardProps = {
   offer: OfferCard;
+  className:  string;
   handleCardHover: (id: number) => void;
 }
 
-function Card({ offer: { isFavorite, isPremium, price, title, type, rating, previewImage, id }, handleCardHover }: CardProps): JSX.Element {
+function Card({ offer: { isFavorite, isPremium, price, title, type, rating, previewImage, id }, className, handleCardHover }: CardProps): JSX.Element {
   const link = generatePath(AppRoute.Offer, { id: id.toString()});
   const onHover = () => {
     handleCardHover(id);
   };
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onHover}>
+    <article className={`place-card ${className}`} onMouseEnter={onHover}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
 
       <div className="cities__image-wrapper place-card__image-wrapper">

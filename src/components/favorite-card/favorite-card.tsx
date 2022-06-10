@@ -1,4 +1,4 @@
-import { convertRating } from '../../utils/utils';
+import { convertRating } from '../../services/utils';
 import { OfferCard } from '../../types/offers';
 
 type FavoriteCardProps = {

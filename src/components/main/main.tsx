@@ -1,6 +1,4 @@
-
-import { Dispatch } from 'redux';
-import { connect, ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
 import Header from '../header/header';
 import MainOffers from '../main-offers/main-offers';
 import MainEmpty from '../main-empty/main-empty';
@@ -15,14 +13,14 @@ type MainProps = {
   isDataLoaded: boolean;
 }
 
-const mapStateToProps = ({ defaultOffers, selectedCity, isDataLoaded }: State) => ({
+const mapStateToProps = ({ defaultOffers, selectedCity, isDataLoaded}: State) => ({
   offers: defaultOffers,
   selectedCity,
   isDataLoaded,
 });
 
 const connector = connect(mapStateToProps);
-function Main({ offers, selectedCity, isDataLoaded }: MainProps): JSX.Element {
+function Main({ offers, selectedCity, isDataLoaded}: MainProps): JSX.Element {
   const offersInCity = offers.filter((offer) => offer.city.name === selectedCity);
 
   return (

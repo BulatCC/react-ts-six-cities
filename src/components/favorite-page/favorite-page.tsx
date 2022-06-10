@@ -1,11 +1,11 @@
-import {connect, ConnectedProps} from 'react-redux';
+import { connect } from 'react-redux';
 import Header from '../header/header';
 import Favorites from '../favorites/favorites';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import { Offer } from '../../types/offers';
 import { State } from '../../types/state';
 
-const mapStateToProps = ({defaultOffers}: State) => ({
+const mapStateToProps = ({ defaultOffers }: State) => ({
   offers: defaultOffers,
 });
 
@@ -21,10 +21,10 @@ function FavoritePage({ offers }: FavoritePageProps): JSX.Element {
   return (
     <div className={`page ${favoriteData.length ? '' : 'page--favorites-empty'}`}>
       <Header />
-      {favoriteData.length ? <Favorites favoriteData={favoriteData}/> : <FavoritesEmpty/>}
+      {favoriteData.length ? <Favorites favoriteData={favoriteData} /> : <FavoritesEmpty />}
     </div>
   );
 }
 
-export {FavoritePage};
+export { FavoritePage };
 export default connector(FavoritePage);
