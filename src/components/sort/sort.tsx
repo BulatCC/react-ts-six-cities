@@ -1,31 +1,18 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useSelector, useDispatch  } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { changeSortType, Actions } from '../../store/actions';
-import { State } from '../../types/state';
+import { actionCreator } from '../../store/actions';
+import { State } from '../../store/root-reducer';
 import { SortType } from '../../consts';
 
-type SortProps = {
-  currentSortType: string,
-  handleSortClick: (sort: string) => void,
-}
-
-const mapStateToProps = ({ currentSortType }: State) => ({
-  currentSortType,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  handleSortClick(sort: string) {
-    dispatch(changeSortType(sort));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-function Sort({ currentSortType, handleSortClick }: SortProps): JSX.Element {
+function Sort(): JSX.Element {
   const [sortMenuIsOpen, setSortMenuIsOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const currentSortType = useSelector((state: State): string => state.DATA.currentSortType);
   const sortTypes = Object.values(SortType);
+
+  const handleSortClick = (sort: string) => {
+    dispatch(actionCreator.changeSortType(sort));
+  }
 
   useEffect(() => {
     const handleClick = () => {
@@ -33,6 +20,7 @@ function Sort({ currentSortType, handleSortClick }: SortProps): JSX.Element {
         setSortMenuIsOpen(false);
       }
     };
+
     const handleEscPress = (evt: KeyboardEvent) => {
       if (evt.key === 'Escape' && sortMenuIsOpen) {
         setSortMenuIsOpen(false);
@@ -73,5 +61,4 @@ function Sort({ currentSortType, handleSortClick }: SortProps): JSX.Element {
   );
 }
 
-export { Sort };
-export default connector(Sort);
+export default Sort;

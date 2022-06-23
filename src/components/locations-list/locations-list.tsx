@@ -1,27 +1,12 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { State } from '../../types/state';
-import { сhangeSelectedCity, Actions } from '../../store/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { State } from '../../store/root-reducer';
+import { actionCreator } from '../../store/actions';
 import { appCityNames } from '../../consts';
 
-type LocationsListProps = {
-  selectedCity: string;
-  handleCityClick: (city: string) => void;
-}
-
-const mapStateToProps = ({ selectedCity }: State) => ({
-  selectedCity,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  handleCityClick(city: string) {
-    dispatch(сhangeSelectedCity(city));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-function LocationLists({ selectedCity, handleCityClick }: LocationsListProps): JSX.Element {
+function LocationLists(): JSX.Element {
+  const selectedCity = useSelector((state: State): string => state.DATA.selectedCity);
+  const dispatch = useDispatch();
+  const handleCityClick = (city: string) => dispatch(actionCreator.сhangeSelectedCity(city));
 
   return (
     <ul className="locations__list tabs__list">
@@ -40,6 +25,4 @@ function LocationLists({ selectedCity, handleCityClick }: LocationsListProps): J
   );
 }
 
-export { LocationLists };
-export default connector(LocationLists);
-
+export default LocationLists;

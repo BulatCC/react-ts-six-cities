@@ -1,21 +1,12 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import Favorites from '../favorites/favorites';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import { Offer } from '../../types/offers';
-import { State } from '../../types/state';
+import { State } from '../../store/root-reducer';
 
-const mapStateToProps = ({ defaultOffers }: State) => ({
-  offers: defaultOffers,
-});
-
-const connector = connect(mapStateToProps);
-
-type FavoritePageProps = {
-  offers: Offer[];
-}
-
-function FavoritePage({ offers }: FavoritePageProps): JSX.Element {
+function FavoritePage(): JSX.Element {
+  const offers = useSelector((state: State): Offer[] => state.DATA.defaultOffers);
   const favoriteData = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -26,5 +17,4 @@ function FavoritePage({ offers }: FavoritePageProps): JSX.Element {
   );
 }
 
-export { FavoritePage };
-export default connector(FavoritePage);
+export default FavoritePage;

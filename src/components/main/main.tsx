@@ -1,26 +1,21 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import MainOffers from '../main-offers/main-offers';
 import MainEmpty from '../main-empty/main-empty';
 import LocationsList from '../locations-list/locations-list';
 import Loader from '../loader/loader';
-import { Offer } from '../../types/offers';
-import { State } from '../../types/state';
+import { State } from '../../store/root-reducer';
 
-type MainProps = {
-  offers: Offer[];
-  selectedCity: string;
-  isDataLoaded: boolean;
-}
+function Main(): JSX.Element {
+  const mainProps = useSelector((state: State) => {
+    return {
+      offers: state.DATA.defaultOffers,
+      selectedCity: state.DATA.selectedCity,
+      isDataLoaded: state.DATA.isDataLoaded,
+    };
+  });
 
-const mapStateToProps = ({ defaultOffers, selectedCity, isDataLoaded}: State) => ({
-  offers: defaultOffers,
-  selectedCity,
-  isDataLoaded,
-});
-
-const connector = connect(mapStateToProps);
-function Main({ offers, selectedCity, isDataLoaded}: MainProps): JSX.Element {
+  const { offers, selectedCity, isDataLoaded } = mainProps;
   const offersInCity = offers.filter((offer) => offer.city.name === selectedCity);
 
   return (
@@ -45,5 +40,4 @@ function Main({ offers, selectedCity, isDataLoaded}: MainProps): JSX.Element {
   );
 }
 
-export { Main };
-export default connector(Main);
+export default Main;

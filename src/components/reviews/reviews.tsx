@@ -1,17 +1,35 @@
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { convertRating, getDate } from '../../services/utils';
-import { Review } from '../../types/reviews';
-
+import { createApi } from '../../services/api';
+import { ApiRoute } from '../../consts';
+import { State } from '../../store/root-reducer';
+import { actionCreator } from '../../store/actions';
 
 type ReviewsProps = {
-  reviews: Review[]
+  hotelId: string | undefined;
 }
 
-function Reviews({ reviews }: ReviewsProps): JSX.Element {
+function Reviews({ hotelId }: ReviewsProps): JSX.Element {
+  const [reviews, setReviews] = useState([]);
+  const isNeedCommentUpdate = useSelector((state: State): boolean => state.DATA.isNeedCommentUpdate);
+  const dispatch = useDispatch();
+  const api = createApi();
+
+  useEffect(() => {
+    api.get(`${ApiRoute.Comments}/${hotelId}`)
+      .then(({ data }) => {
+        setReviews(data);
+        dispatch(actionCreator.isNeedUpdateComment(false))
+      })
+      .catch((e) => console.log(e));
+  }, [isNeedCommentUpdate]);
+
   return (
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.map(({ id, comment, rating, date, user: {avatarUrl, name} }) => (
+        {reviews.map(({ id, comment, rating, date, user: { avatarUrl, name } }) => (
           <li className="reviews__item" key={id}>
             <div className="reviews__user user">
               <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -36,7 +54,6 @@ function Reviews({ reviews }: ReviewsProps): JSX.Element {
           </li>
         ),
         )}
-
       </ul>
     </>
   );

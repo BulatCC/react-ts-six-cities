@@ -1,4 +1,4 @@
-export type OfferCard = {
+export type OfferCardTypes = {
   isFavorite: boolean,
   isPremium: boolean,
   price: number,
@@ -16,7 +16,7 @@ export type User = {
   avatarUrl: string
 }
 
-export type Offer = OfferCard & {
+export type Offer = OfferCardTypes & {
   city: {
     name: string;
     location: {

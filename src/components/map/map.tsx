@@ -25,7 +25,7 @@ const currentIcon = new Icon({
 function Map({ offers, activeCard }: MapProps): JSX.Element {
   const [{ city: { location } }] = offers;
   const mapRef = useRef(null);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const map = useMap(location, mapRef);
 
@@ -40,7 +40,7 @@ function Map({ offers, activeCard }: MapProps): JSX.Element {
         id === activeCard ? marker.setIcon(currentIcon).addTo(map) : marker.setIcon(defaultIcon).addTo(map);
         marker.on('click', () =>  {
           window.scrollTo(0,0);
-          return history(generatePath(AppRoute.Offer, { id: id.toString()}));
+          return navigate(generatePath(AppRoute.Offer, { id: id.toString()}));
         });
         marker.on('mouseover', () => marker.openPopup());
         marker.on('mouseout', () => marker.closePopup());

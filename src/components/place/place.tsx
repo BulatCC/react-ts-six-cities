@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, Navigate } from 'react-router-dom';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
@@ -7,56 +7,41 @@ import Reviews from '../reviews/reviews';
 import Loader from '../loader/loader';
 import Map from '../map/map';
 import OfferCard from '../offer-card/offer-card';
+import FavoriteButton from '../favorite-button/favorite-button';
 import { Offer } from '../../types/offers';
-import { State } from '../../types/state';
+import { State } from '../../store/root-reducer';
 import { convertRating } from '../../services/utils';
-import { AppRoute, ApiRoute } from '../../consts';
+import { AppRoute, ApiRoute, AuthorizationStatus } from '../../consts';
 import { createApi } from '../../services/api';
 
-
-const mapStateToProps = ({ defaultOffers, isDataLoaded }: State) => ({
-  offers: defaultOffers,
-  isDataLoaded,
-});
-
-const connector = connect(mapStateToProps);
-
-type PlaceProps = {
-  offers: Offer[];
-  isDataLoaded: boolean;
-}
-
-function Place({ offers, isDataLoaded }: PlaceProps): JSX.Element {
-  const urlId = useParams();
-  const api = createApi();
-  const [reviews, setReviews] = useState([]);
+function Place(): JSX.Element {
+  const authorizationStatus = useSelector((state: State): string => state.USER.authorizationStatus);
+  const [isDataLoaded, setisDataLoaded] = useState<false | typeof LOAD_ERROR>(false)
+  const [placeData, setPlaceData] = useState<Offer | null>(null)
   const [nearbyOffers, setNearbyOffers] = useState<Offer[] | null>(null);
   const [activeCard, setActivecard] = useState(0);
-
-  const getOffer = (): Offer | false | undefined => {
-    if (isDataLoaded) {
-      return offers.find((offer) => offer.id === Number(urlId.id));
-    }
-    return false;
-  };
+  const LOAD_ERROR = 'LOAD_ERROR';
+  const urlId = useParams().id || '';
+  const api = createApi();
 
   const handleHoveredCard = (id: number): void => {
     setActivecard(id);
   };
 
   useEffect(() => {
-    api.get(`${ApiRoute.Comments}/${urlId.id}`)
-      .then(({ data }) => setReviews(data))
-      .catch((e) => console.log(e));
+    api.get(`${ApiRoute.Offers}/${urlId}`)
+      .then(({ data }) => setPlaceData(data))
+      .catch((e) => {
+        setisDataLoaded(LOAD_ERROR);
+        console.log(e);
+      });
 
-    api.get(`${ApiRoute.Offers}/${urlId.id}/nearby`)
+    api.get(`${ApiRoute.Offers}/${urlId}/nearby`)
       .then(({ data }) => setNearbyOffers(data))
       .catch((e) => console.log(e));
-  }, [urlId.id]);
+  }, [urlId]);
 
-  const placeData = getOffer();
-
-  if (placeData === undefined) {
+  if (isDataLoaded === LOAD_ERROR) {
     return <Navigate to={AppRoute.NotFound} />;
   }
 
@@ -85,12 +70,14 @@ function Place({ offers, isDataLoaded }: PlaceProps): JSX.Element {
                     </div>}
                   <div className="property__name-wrapper">
                     <h1 className="property__name">{placeData.title}</h1>
-                    <button className={`property__bookmark-button button ${placeData.isFavorite ? 'property__bookmark-button--active' : ''}`} type="button">
-                      <svg className="property__bookmark-icon" width="31" height="33">
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </button>
+                    <FavoriteButton
+                      props={{ id: +urlId,  isFavorite: !!placeData.isFavorite}}
+                      style={{
+                        button: 'property__bookmark-button',
+                        svg: 'property__bookmark-icon',
+                        svgWidth: 31,
+                        svgHeight: 33,
+                      }} />
                   </div>
                   <div className="property__rating rating">
                     <div className="property__stars rating__stars">
@@ -140,8 +127,8 @@ function Place({ offers, isDataLoaded }: PlaceProps): JSX.Element {
                   </div>
                   <div className="property__wrapper">
                     <section className="property__reviews reviews">
-                      <Reviews reviews={reviews} />
-                      <ReviewForm />
+                      <Reviews hotelId={urlId} />
+                      {authorizationStatus === AuthorizationStatus.Auth ? <ReviewForm hotelId={urlId} /> : ''}
                     </section>
                   </div>
                 </div>
@@ -163,11 +150,8 @@ function Place({ offers, isDataLoaded }: PlaceProps): JSX.Element {
             </div>
           </main>
       }
-
     </div>
   );
 }
 
-export { Place };
-export default connector(Place);
-
+export default Place;

@@ -7,3 +7,9 @@ export type Review = {
   user: User,
   date: Date,
 }
+
+export type ReviewBackend = {
+  rating: string,
+  comment: string,
+  id: string | undefined,
+}

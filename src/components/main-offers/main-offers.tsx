@@ -1,32 +1,26 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import Sort from '../sort/sort';
 import { Offer } from '../../types/offers';
-import { State } from '../../types/state';
-import {sortOffers} from '../../services/utils';
-import {SortType} from '../../consts';
+import { State } from '../../store/root-reducer';
+import { sortOffers } from '../../services/utils';
+import { SortType } from '../../consts';
 
 type MainOffersProps = {
   offersInCity: Offer[];
   selectedCity: string;
-  currentSortType: string;
 }
 
-const mapStateToProps = ({ currentSortType }: State) => ({
-  currentSortType,
-});
-
-const connector = connect(mapStateToProps);
-
-function MainOffers({ offersInCity, selectedCity, currentSortType }: MainOffersProps): JSX.Element {
+function MainOffers({ offersInCity, selectedCity }: MainOffersProps): JSX.Element {
   const [activeCard, setActivecard] = useState(0);
+  const currentSortType = useSelector((state: State): string => state.DATA.currentSortType);
   const handleHoveredCard = (id: number): void => {
     setActivecard(id);
   };
 
-  const sortedOffers:Offer[] = currentSortType === SortType.Popular ? offersInCity : sortOffers[currentSortType](offersInCity);
+  const sortedOffers: Offer[] = currentSortType === SortType.Popular ? offersInCity : sortOffers[currentSortType](offersInCity);
 
   return (
     <div className="cities__places-container container">
@@ -45,5 +39,4 @@ function MainOffers({ offersInCity, selectedCity, currentSortType }: MainOffersP
   );
 }
 
-export { MainOffers };
-export default connector(MainOffers);
+export default MainOffers;

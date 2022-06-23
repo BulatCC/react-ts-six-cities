@@ -1,16 +1,19 @@
+import { memo } from 'react';
 import { Link, generatePath } from 'react-router-dom';
+import FavoriteButton from '../favorite-button/favorite-button';
 import { AppRoute } from '../../consts';
 import { convertRating } from '../../services/utils';
-import { OfferCard } from '../../types/offers';
+import { OfferCardTypes } from '../../types/offers';
 
-type CardProps = {
-  offer: OfferCard;
-  className:  string;
+
+type OfferCardProps = {
+  offer: OfferCardTypes;
+  className: string;
   handleCardHover: (id: number) => void;
 }
 
-function Card({ offer: { isFavorite, isPremium, price, title, type, rating, previewImage, id }, className, handleCardHover }: CardProps): JSX.Element {
-  const link = generatePath(AppRoute.Offer, { id: id.toString()});
+function OfferCard({ offer: { isFavorite, isPremium, price, title, type, rating, previewImage, id }, className, handleCardHover }: OfferCardProps): JSX.Element {
+  const link = generatePath(AppRoute.Offer, { id: id.toString() });
   const onHover = () => {
     handleCardHover(id);
   };
@@ -18,12 +21,10 @@ function Card({ offer: { isFavorite, isPremium, price, title, type, rating, prev
   return (
     <article className={`place-card ${className}`} onMouseEnter={onHover}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={link}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
-
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -31,12 +32,14 @@ function Card({ offer: { isFavorite, isPremium, price, title, type, rating, prev
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton
+           props={{id, isFavorite}}
+           style={{
+            button: 'place-card__bookmark-button',
+            svg: 'place-card__bookmark-icon',
+            svgWidth: 18,
+            svgHeight: 19,
+        }}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -60,4 +63,4 @@ function Card({ offer: { isFavorite, isPremium, price, title, type, rating, prev
   );
 }
 
-export default Card;
+export default memo(OfferCard, (prev, next) => prev.offer.id === next.offer.id);

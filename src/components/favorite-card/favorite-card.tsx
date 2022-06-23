@@ -1,17 +1,22 @@
+import { Link, generatePath } from 'react-router-dom';
+import FavoriteButton from '../favorite-button/favorite-button';
 import { convertRating } from '../../services/utils';
-import { OfferCard } from '../../types/offers';
+import { OfferCardTypes } from '../../types/offers';
+import { AppRoute } from '../../consts';
 
 type FavoriteCardProps = {
-  offer: OfferCard;
+  offer: OfferCardTypes;
 }
 
 function FavoriteCard({ offer: { isFavorite, price, title, type, rating, previewImage, id } }: FavoriteCardProps): JSX.Element {
+  const link = generatePath(AppRoute.Offer, { id: id.toString() });
+
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={link}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="image" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -19,12 +24,14 @@ function FavoriteCard({ offer: { isFavorite, price, title, type, rating, preview
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <FavoriteButton
+            props={{ id, isFavorite }}
+            style={{
+              button: 'place-card__bookmark-button',
+              svg: 'place-card__bookmark-icon',
+              svgWidth: 18,
+              svgHeight: 19,
+            }} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -37,7 +44,9 @@ function FavoriteCard({ offer: { isFavorite, price, title, type, rating, preview
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={link}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

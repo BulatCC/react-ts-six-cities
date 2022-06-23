@@ -22,7 +22,7 @@ function useMap(location: Location, mapRef: MutableRefObject<HTMLElement | null>
     if (mapRef.current !== null && map !== null) {
       map.setView([location.latitude, location.longitude], location.zoom);
     }
-  }, [location, mapRef]);
+  }, [location]);
 
   return map;
 }

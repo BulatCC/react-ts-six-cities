@@ -1,31 +1,31 @@
 import React from 'react';
-// import ReactDOM from 'react-dom/client';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunk  from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import {reducer} from './store/reducer';
+import {configureStore} from '@reduxjs/toolkit';
+import { rootReducer } from './store/root-reducer';
 import App from './components/app/app';
-import {createApi} from './services/api';
-import {fetchOffers} from './store/api-actions';
-import {ThunkAppDispatch} from './types/actions';
+import { createApi } from './services/api';
+import { fetchOffers, getAuthStatus } from './store/api-actions';
 
 const api = createApi();
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-  ),
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
+});
 
 store.dispatch(fetchOffers());
+store.dispatch(getAuthStatus());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

@@ -1,27 +1,63 @@
-import {Offer} from '../types/offers';
+import {createAction} from '@reduxjs/toolkit';
+import { Offer } from '../types/offers';
+import { UserData } from '../types/user';
 
 export enum ActionType {
-  ChangeSelectedCity = 'ChangeSelectedCity',
-  LoadOffers = 'LoadOffers',
-  ChangeSortType = 'changeSortType',
+  ChangeAuthStatus = 'user/ChangeAuthStatus',
+  SetUserData = 'user/SetUserData',
+  ChangeSelectedCity = 'data/ChangeSelectedCity',
+  LoadOffers = 'data/LoadOffers',
+  ChangeSortType = 'data/ChangeSortType',
+  IsNeedUpdateComment = 'data/IsNeedUpdateComment',
+  UpdateFavoriteId = 'data/UpdateFavoriteId',
+  IsNeedUpdateFavoriteButton = 'data/IsNeedUpdateFavoriteButton',
 }
 
-export const сhangeSelectedCity = (city: string) => ({
-  type: ActionType.ChangeSelectedCity,
-  payload: city,
-} as const);
+export const actionCreator = {
+  сhangeSelectedCity: createAction(
+    ActionType.ChangeSelectedCity,
+    (city: string) => ({
+      payload: city,
+    }),
+  ),
+   loadOffers: createAction(
+    ActionType.LoadOffers,
+    (offers: Offer[]) => ({
+      payload: offers,
+    }),
+  ),
+  changeSortType: createAction(
+    ActionType.ChangeSortType,
+    (sortType: string) => ({
+      payload: sortType,
+    }),
+  ),
 
-export const loadOffers = (offers: Offer[]) => ({
-  type: ActionType.LoadOffers,
-  payload: offers,
-} as const);
+  isNeedUpdateComment: createAction(
+    ActionType.IsNeedUpdateComment,
+    (isNeed: boolean) => ({
+      payload: isNeed,
+    }),
+  ),
 
-export const changeSortType = (sortType: string) => ({
-  type: ActionType.ChangeSortType,
-  payload: sortType,
-} as const);
+  updateFavoriteId: createAction(
+    ActionType.UpdateFavoriteId,
+    (UpdateFavoriteId: number) => ({
+      payload: UpdateFavoriteId,
+    }),
+  ),
 
-export type Actions =
-  | ReturnType<typeof сhangeSelectedCity>
-  | ReturnType<typeof loadOffers>
-  | ReturnType<typeof changeSortType>
+  changeAuthStatus: createAction(
+    ActionType.ChangeAuthStatus,
+    (authStatus: string) => ({
+      payload: authStatus,
+    }),
+  ),
+
+  setUserData: createAction(
+    ActionType.SetUserData,
+    (userData: UserData) => ({
+      payload: userData,
+    }),
+  ),
+}
