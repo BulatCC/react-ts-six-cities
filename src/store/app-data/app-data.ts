@@ -2,16 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { actionCreator } from '../actions';
 import { CityNames, SortType } from '../../consts';
 import { Offer } from '../../types/offers';
-
-export const updateFavoriteData = (offers:Offer[], UpdateFavoriteId: number) => {
-    const favoriteIndex = offers.findIndex(offer => offer.id === UpdateFavoriteId);
-    offers[favoriteIndex] = {
-      ...offers[favoriteIndex],
-      isFavorite: !offers[favoriteIndex].isFavorite,
-    };
-
-    return offers;
-};
+import { updateFavoriteData } from '../../services/utils';
 
 export type AppData = {
   selectedCity: string,
@@ -23,7 +14,7 @@ export type AppData = {
   isNeedUpdateFavoriteButton: boolean,
 };
 
-const initialState: AppData = {
+export const initialState: AppData = {
   selectedCity: CityNames.Paris,
   defaultOffers: [],
   isDataLoaded: false,

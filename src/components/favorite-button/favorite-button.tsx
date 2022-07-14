@@ -40,7 +40,7 @@ function FavoriteButton({ props: { id, isFavorite }, style: { button, svg, svgWi
   }
 
   return (
-    <button onClick={handleFavoriteClick} className={`${button} button ${favoriteStatus ? `${button}--active` : ''}`} type="button">
+    <button onClick={handleFavoriteClick} className={`${button} button ${favoriteStatus ? `${button}--active` : ''}`} type="button" data-testid="favorite-button">
       <svg className={svg} width={svgWidth} height={svgHeight}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

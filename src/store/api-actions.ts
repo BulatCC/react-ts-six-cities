@@ -47,14 +47,3 @@ export const postReview = ({ rating, comment, id }: ReviewBackend): ThunkActionR
     await api.post(`${ApiRoute.Comments}/${id}`, { rating, comment });
     dispatch(actionCreator.isNeedUpdateComment(true));
   };
-
-
-export const setFavorite = (id: number, status: number): ThunkActionResult =>
-  async (dispatch, getState, api) => {
-    if (getState().USER.authorizationStatus === AuthorizationStatus.Auth) {
-      await api.post(`${ApiRoute.Favorite}/${id}/${status}`);
-      dispatch(actionCreator.updateFavoriteId(id));
-    } else {
-      console.log('not authorised');
-    }
-  };

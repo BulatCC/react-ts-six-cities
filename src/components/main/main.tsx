@@ -32,7 +32,7 @@ function Main(): JSX.Element {
           <div className="cities">
             {offersInCity.length ?
               <MainOffers offersInCity={offersInCity} selectedCity={selectedCity} /> :
-              <MainEmpty />}
+              <MainEmpty selectedCity={selectedCity} />}
           </div>
           : <Loader />}
       </main>

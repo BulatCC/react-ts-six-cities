@@ -22,7 +22,7 @@ function OfferCard({ offer: { isFavorite, isPremium, price, title, type, rating,
     <article className={`place-card ${className}`} onMouseEnter={onHover}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={link}>
+        <Link to={link} data-testid="offer-link">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>
@@ -55,7 +55,6 @@ function OfferCard({ offer: { isFavorite, isPremium, price, title, type, rating,
           <Link to={link}>
             {title}
           </Link>
-          <a href="#"></a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

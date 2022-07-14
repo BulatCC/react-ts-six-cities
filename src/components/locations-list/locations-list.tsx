@@ -10,13 +10,13 @@ function LocationLists(): JSX.Element {
 
   return (
     <ul className="locations__list tabs__list">
-      {appCityNames.map((city) => (
+      {appCityNames.map((city, i) => (
         <li className="locations__item" key={city}>
-          <a className={`locations__item-link tabs__item ${city === selectedCity ? 'tabs__item--active' : ''}`} href="#" onClick={(evt) => {
+          <a data-testid = {`${'city-filter'}${i}`}  className={`locations__item-link tabs__item ${city === selectedCity ? 'tabs__item--active' : ''}`} href="#" onClick={(evt) => {
             evt.preventDefault();
             handleCityClick(city);
           }}
-          ><span>{city}</span>
+          ><span data-testid = "city-name">{city}</span>
           </a>
         </li>
       ),

@@ -1,5 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actionCreator } from '../../store/actions';
 import FavoriteCard from '../favorite-card/favorite-card';
 import { Offer, SortedData, CityOffers } from '../../types/offers';
+import { AppRoute } from '../../consts';
 
 type FavoriteProps = {
   favoriteData: Offer[];
@@ -46,6 +50,13 @@ function Favorites({ favoriteData }: FavoriteProps): JSX.Element {
 
   const sortedData = getSortedData(favoriteData);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleCityClick = (city: string) => {
+    dispatch(actionCreator.сhangeSelectedCity(city));
+    navigate(AppRoute.Root);
+  }
+
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
@@ -56,12 +67,15 @@ function Favorites({ favoriteData }: FavoriteProps): JSX.Element {
               <li className="favorites__locations-items" key={offer.cityName}>
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
-                    <a className="locations__item-link" href="#">
+                    <a href="#" className={'locations__item-link'} onClick={(evt) => {
+                      evt.preventDefault();
+                        handleCityClick(offer.cityName);
+                    }} data-testid="city">
                       <span>{offer.cityName}</span>
-                    </a>
+                    </a >
                   </div>
                 </div>
-                <div className="favorites__places">
+                <div className="favorites__places" data-testid="card-list">
                   {offer.data.map((offerData) => <FavoriteCard key={offerData.id} offer={offerData} />)}
                 </div>
               </li>

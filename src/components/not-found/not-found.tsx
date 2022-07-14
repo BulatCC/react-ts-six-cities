@@ -11,8 +11,7 @@ function NotFound(): JSX.Element {
           margin: 'auto',
         }}
         >
-          <h1>Страница не найдена
-          </h1>
+          <h1>Страница не найдена</h1>
           <NavLink to={AppRoute.Root} style={{
             display: 'flex',
             alignItems: 'center',

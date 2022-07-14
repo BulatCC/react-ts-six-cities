@@ -14,14 +14,14 @@ function FavoriteCard({ offer: { isFavorite, price, title, type, rating, preview
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={link}>
-          <img className="place-card__image" src={previewImage} width="150" height="110" alt="image" />
+        <Link to={link} data-testid="favorite-img-link">
+          <img data-testid="favorite-img" className="place-card__image" src={previewImage} width="150" height="110" alt="image" />
         </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
+            <b data-testid="favorite-price" className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <FavoriteButton
@@ -31,7 +31,7 @@ function FavoriteCard({ offer: { isFavorite, price, title, type, rating, preview
               svg: 'place-card__bookmark-icon',
               svgWidth: 18,
               svgHeight: 19,
-            }} />
+            }} data-testid="favorite-button" />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -43,7 +43,7 @@ function FavoriteCard({ offer: { isFavorite, price, title, type, rating, preview
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
+        <h2 data-testid="favorite-title"  className="place-card__name">
           <Link to={link}>
             {title}
           </Link>

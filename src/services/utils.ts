@@ -1,5 +1,5 @@
-import { SortType } from '../consts';
 import { Offer } from '../types/offers';
+import { SortType } from '../consts';
 
 export const convertRating = (rate: number): string => {
   const MAX_RATING = 5;
@@ -19,4 +19,14 @@ export const sortOffers = {
   [SortType.PriceHighToLow]: (offers: Offer[]): Offer[] => offers.slice().sort((a, b) => b.price - a.price),
   [SortType.PriceLowToHigh]: (offers: Offer[]): Offer[] => offers.slice().sort((a, b) => a.price - b.price),
   [SortType.TopRated]: (offers: Offer[]): Offer[] => offers.slice().sort((a, b) => b.rating - a.rating),
+};
+
+export const updateFavoriteData = (offers:Offer[], UpdateFavoriteId: number) => {
+    const favoriteIndex = offers.findIndex(offer => offer.id === UpdateFavoriteId);
+    offers[favoriteIndex] = {
+      ...offers[favoriteIndex],
+      isFavorite: !offers[favoriteIndex].isFavorite,
+    };
+
+    return offers;
 };

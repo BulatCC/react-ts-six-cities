@@ -44,3 +44,13 @@ export type SortedData = {
 };
 
 export type CityOffers = Record<string, Offer[]>;
+
+// аналогичная запись для CityOffers через type
+// export type CityOffers = {
+//   [index: string]: Offer[]
+// }
+
+// аналогичная запись для CityOffers через interface
+// export interface CityOffers {
+//   [index: string]: Offer[]
+// }

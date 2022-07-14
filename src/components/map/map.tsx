@@ -51,7 +51,7 @@ function Map({ offers, activeCard }: MapProps): JSX.Element {
   }, [map, activeCard, offers]);
 
   return (
-    <div style={{
+    <div data-testid="map" style={{
       height: '100%',
     }}
     ref={mapRef}

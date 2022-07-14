@@ -12,7 +12,7 @@ function OffersList({offers, handleHoveredCard}: OffersListProps): JSX.Element {
   };
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" data-testid="offers-list">
       {offers.map((offer) => <OfferCard key={offer.id} offer={offer} handleCardHover={handleCardHover} className={'cities__place-card'} />)}
     </div>
   );

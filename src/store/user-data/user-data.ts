@@ -8,7 +8,7 @@ export type UserState = {
   userData: UserData,
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: {
     email: '',
