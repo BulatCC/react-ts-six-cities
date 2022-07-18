@@ -23,8 +23,8 @@ describe('Reducer: userData', () => {
         userData: {
           email: 'fake@mail.gnu',
           avatarUrl: 'fakepath',
-        }
+        },
       });
   });
-})
+});
 

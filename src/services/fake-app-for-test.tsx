@@ -24,18 +24,25 @@ export const fakeApp = (component: JSX.Element, routeComponent: JSX.Element | nu
   });
 
   function FakeMainPage() {
-    return <h1>Main page</h1>
+    return <h1>Main page</h1>;
   }
 
-  return <Provider store={store}>
-    <MemoryRouter >
-      <>
-        {component}
-      </>
-      <Routes>
-        {routeComponent}
-        <Route path={AppRoute.Root} element={<FakeMainPage />} />
-      </Routes>
-    </MemoryRouter>
-  </Provider>
-}
+  function FakeLoginPage() {
+    return <h1>Login page</h1>;
+  }
+
+  return (
+    <Provider store={store}>
+      <MemoryRouter >
+        <>
+          {component}
+        </>
+        <Routes>
+          {routeComponent}
+          <Route path={AppRoute.Root} element={<FakeMainPage />} />
+          <Route path={AppRoute.Login} element={<FakeLoginPage />} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
+  );
+};

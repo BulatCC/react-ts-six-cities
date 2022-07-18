@@ -12,7 +12,7 @@ function Sort(): JSX.Element {
 
   const handleSortClick = (sort: string) => {
     dispatch(actionCreator.changeSortType(sort));
-  }
+  };
 
   useEffect(() => {
     const handleClick = () => {
@@ -41,14 +41,14 @@ function Sort(): JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={() => { setSortMenuIsOpen(!sortMenuIsOpen); }} >
+      <span data-testid = "sort" className="places__sorting-type" tabIndex={0} onClick={() => { setSortMenuIsOpen(!sortMenuIsOpen); }} >
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
       {sortMenuIsOpen &&
-      <ul className="places__options places__options--custom places__options--opened">
+      <ul data-testid = "sort-dropdown" className="places__options places__options--custom places__options--opened">
         {sortTypes.map((sortType) => (
           <li className={`places__option ${currentSortType === sortType ? 'places__option--active' : ''}`} tabIndex={0} key={sortType} onClick={() => {
             handleSortClick(sortType);

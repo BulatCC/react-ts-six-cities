@@ -1,4 +1,4 @@
-import {createAction} from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 import { Offer } from '../types/offers';
 import { UserData } from '../types/user';
 
@@ -20,7 +20,7 @@ export const actionCreator = {
       payload: city,
     }),
   ),
-   loadOffers: createAction(
+  loadOffers: createAction(
     ActionType.LoadOffers,
     (offers: Offer[]) => ({
       payload: offers,
@@ -60,4 +60,4 @@ export const actionCreator = {
       payload: userData,
     }),
   ),
-}
+};

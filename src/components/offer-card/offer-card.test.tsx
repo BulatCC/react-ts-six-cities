@@ -6,13 +6,11 @@ import OfferCard from './offer-card';
 import { mockOffer } from '../../services/mock';
 import { AppRoute } from '../../consts';
 
-
-
 describe('Component: MainOffers', () => {
   const handleCardHover = jest.fn();
 
   function FakeOffer() {
-    return <h1>Offer page</h1>
+    return <h1>Offer page</h1>;
   }
 
   const fakeOfferPage = <Route path={AppRoute.Offer} element={<FakeOffer />} />;
@@ -24,4 +22,3 @@ describe('Component: MainOffers', () => {
     expect(screen.getByText(/Offer page/i)).toBeInTheDocument();
   });
 });
-

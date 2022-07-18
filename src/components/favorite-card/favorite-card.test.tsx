@@ -6,19 +6,22 @@ import FavoriteCard from './favorite-card';
 import { AppRoute } from '../../consts';
 
 
-const fakeFavoriteCardComponent = <FavoriteCard offer={{
-  isFavorite: true,
-  price: 100,
-  title: 'fakeTitle',
-  type: 'fakeType',
-  rating: 4,
-  previewImage: 'fakePath',
-  id: 2,
-  isPremium: false,
-}} />
+const fakeFavoriteCardComponent = (
+  <FavoriteCard offer={{
+    isFavorite: true,
+    price: 100,
+    title: 'fakeTitle',
+    type: 'fakeType',
+    rating: 4,
+    previewImage: 'fakePath',
+    id: 2,
+    isPremium: false,
+  }}
+  />
+);
 
 function FakeOfferPage() {
-  return <h1>Offer page</h1>
+  return <h1>Offer page</h1>;
 }
 
 const fakeOfferComponent = <Route path={`${AppRoute.Offer}`} element={<FakeOfferPage />} />;

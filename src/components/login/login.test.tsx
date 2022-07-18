@@ -21,7 +21,7 @@ describe('Component: Login', () => {
     expect(screen.getByDisplayValue(/123456/i)).toBeInTheDocument();
   });
 
-  // тест кейс вызывает бесконечный рендер. баг
+  // тест кейс вызывает бесконечный рендер.
   // test('should redirect to main page if authorization status "auth"', () => {
   //   render(fakeApp(<Login /> ));
   //   expect(screen.getByText(/Main page/i)).toBeInTheDocument();

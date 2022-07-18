@@ -7,7 +7,7 @@ import { State } from '../../store/root-reducer';
 import { actionCreator } from '../../store/actions';
 
 type ReviewsProps = {
-  hotelId: string | undefined;
+  hotelId?: string;
 }
 
 function Reviews({ hotelId }: ReviewsProps): JSX.Element {
@@ -20,7 +20,7 @@ function Reviews({ hotelId }: ReviewsProps): JSX.Element {
     api.get(`${ApiRoute.Comments}/${hotelId}`)
       .then(({ data }) => {
         setReviews(data);
-        dispatch(actionCreator.isNeedUpdateComment(false))
+        dispatch(actionCreator.isNeedUpdateComment(false));
       })
       .catch((e) => console.log(e));
   }, [isNeedCommentUpdate]);

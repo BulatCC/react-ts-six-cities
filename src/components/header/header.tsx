@@ -26,7 +26,7 @@ function Header(): JSX.Element {
         <div className="header__wrapper">
           <div className="header__left">
             <NavLink to={AppRoute.Root} className={'header__logo-link header__logo-link--active'} data-testid="logo-link">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" data-testid="logo"/>
+              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" data-testid="logo" />
             </NavLink>
           </div>
           <nav className="header__nav">
@@ -35,15 +35,18 @@ function Header(): JSX.Element {
                 <li className="header__nav-item user">
                   <NavLink to={AppRoute.Favorites} className={'header__nav-link header__nav-link--profile'} data-testid="favorite-link">
                     <div className="header__avatar-wrapper user__avatar-wrapper" data-testid="avatar" style={{
-                      backgroundImage: `url(${avatarUrl})`
-                    }}>
+                      backgroundImage: `url(${avatarUrl})`,
+                    }}
+                    >
                     </div>
                     <span className="header__user-name user__name">{email}</span>
                     <span style={{
-                      "width": "100%",
-                      "marginTop": "2px",
-                      "marginLeft": "28px",
-                    }}>Favorites offers</span>
+                      'width': '100%',
+                      'marginTop': '2px',
+                      'marginLeft': '28px',
+                    }}
+                    >Favorites offers
+                    </span>
                   </NavLink>
                 </li>
                 <li className="header__nav-item">
@@ -61,8 +64,8 @@ function Header(): JSX.Element {
                     <span className="header__login">Sign in</span>
                   </NavLink>
                 </li>
-              </ul>)
-            }
+              </ul>
+              )}
           </nav>
         </div>
       </div>

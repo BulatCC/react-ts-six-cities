@@ -17,7 +17,7 @@ describe('Component: FavoriteCard', () => {
 
   test('should redirect to login page by cklicking "sign in" if user unauthorized', () => {
     function FakeLoginPage() {
-      return <h1>Login page</h1>
+      return <h1>Login page</h1>;
     }
 
     const fakeLoginPage = <Route path={AppRoute.Login} element={<FakeLoginPage />} />;
@@ -30,7 +30,7 @@ describe('Component: FavoriteCard', () => {
 
   test('should redirect to favorites page by cklicking "user" if user authorized', () => {
     function FakeFavoritePage() {
-      return <h1>Favorite page</h1>
+      return <h1>Favorite page</h1>;
     }
 
     const fakeFavoritePage = <Route path={AppRoute.Favorites} element={<FakeFavoritePage />} />;

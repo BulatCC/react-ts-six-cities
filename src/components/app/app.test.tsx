@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import {configureMockStore} from '@jedmao/redux-mock-store';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import App from '../app/app';
 import { AppRoute, CityNames, SortType, AuthorizationStatus } from '../../consts';
 import { mockOffer } from '../../services/mock';
@@ -24,12 +24,14 @@ const store = mockStore({
   },
 });
 
-const fakeApp = (route: string) => {
-    return <Provider store={store}>
+function fakeApp (route: string) {
+  return (
+    <Provider store={store}>
       <MemoryRouter initialEntries={[route]}>
         <App />
       </MemoryRouter>
     </Provider>
+  );
 }
 
 describe('Application Routing', () => {

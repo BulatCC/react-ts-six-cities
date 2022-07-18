@@ -3,7 +3,7 @@ import { useSelector, useDispatch  } from 'react-redux';
 import Header from '../header/header';
 import Loader from '../loader/loader';
 import { loginAction } from '../../store/api-actions';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { State } from '../../store/root-reducer';
 import { AppRoute, AuthorizationStatus } from '../../consts';
@@ -11,7 +11,6 @@ import { AppRoute, AuthorizationStatus } from '../../consts';
 function Login(): JSX.Element {
   const authorizationStatus = useSelector((state: State): string => state.USER.authorizationStatus);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: null,
     password: null,
@@ -27,7 +26,7 @@ function Login(): JSX.Element {
 
   const handleSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
-  }
+  };
 
   const hadleFormChange = ({ target }: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void => {
     setFormData({
@@ -47,7 +46,8 @@ function Login(): JSX.Element {
             <form data-testid = "submit-form" onSubmit={(evt: FormEvent<HTMLFormElement>) => {
               evt.preventDefault();
               handleSubmit(formData);
-            }} className="login__form form" action="#" method="post">
+            }} className="login__form form" action="#" method="post"
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input data-testid = "login" onChange={hadleFormChange} className="login__input form__input" type="email" name="email" placeholder="Email" required />

@@ -16,8 +16,8 @@ import { createApi } from '../../services/api';
 
 function Place(): JSX.Element {
   const authorizationStatus = useSelector((state: State): string => state.USER.authorizationStatus);
-  const [isDataLoaded, setisDataLoaded] = useState<false | typeof LOAD_ERROR>(false)
-  const [placeData, setPlaceData] = useState<Offer | null>(null)
+  const [isDataLoaded, setisDataLoaded] = useState<false | typeof LOAD_ERROR>(false);
+  const [placeData, setPlaceData] = useState<Offer | null>(null);
   const [nearbyOffers, setNearbyOffers] = useState<Offer[] | null>(null);
   const [activeCard, setActivecard] = useState(0);
   const LOAD_ERROR = 'LOAD_ERROR';
@@ -71,13 +71,14 @@ function Place(): JSX.Element {
                   <div className="property__name-wrapper">
                     <h1 className="property__name">{placeData.title}</h1>
                     <FavoriteButton
-                      props={{ id: +urlId,  isFavorite: !!placeData.isFavorite}}
+                      props={{ id: +urlId, isFavorite: !!placeData.isFavorite }}
                       style={{
                         button: 'property__bookmark-button',
                         svg: 'property__bookmark-icon',
                         svgWidth: 31,
                         svgHeight: 33,
-                      }} />
+                      }}
+                    />
                   </div>
                   <div className="property__rating rating">
                     <div className="property__stars rating__stars">

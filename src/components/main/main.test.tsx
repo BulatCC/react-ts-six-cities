@@ -24,16 +24,18 @@ const fakeAppLoading = (component: JSX.Element) => {
     },
   });
 
-  return <Provider store={store}>
-    <MemoryRouter >
-      <Routes>
-        <Route path={AppRoute.Root} element={component} />
-      </Routes>
-    </MemoryRouter>
-  </Provider>
-}
+  return (
+    <Provider store={store}>
+      <MemoryRouter >
+        <Routes>
+          <Route path={AppRoute.Root} element={component} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
+  );
+};
 
-const fakeAppNoData= (component: JSX.Element) => {
+const fakeAppNoData = (component: JSX.Element) => {
   const mockStore = configureMockStore();
 
   const store = mockStore({
@@ -51,14 +53,16 @@ const fakeAppNoData= (component: JSX.Element) => {
     },
   });
 
-  return <Provider store={store}>
-    <MemoryRouter >
-      <Routes>
-        <Route path={AppRoute.Root} element={component} />
-      </Routes>
-    </MemoryRouter>
-  </Provider>
-}
+  return (
+    <Provider store={store}>
+      <MemoryRouter >
+        <Routes>
+          <Route path={AppRoute.Root} element={component} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
+  );
+};
 
 describe('Component: Main', () => {
   test('should show offers if data is loaded', () => {

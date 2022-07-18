@@ -21,12 +21,12 @@ export const sortOffers = {
   [SortType.TopRated]: (offers: Offer[]): Offer[] => offers.slice().sort((a, b) => b.rating - a.rating),
 };
 
-export const updateFavoriteData = (offers:Offer[], UpdateFavoriteId: number) => {
-    const favoriteIndex = offers.findIndex(offer => offer.id === UpdateFavoriteId);
-    offers[favoriteIndex] = {
-      ...offers[favoriteIndex],
-      isFavorite: !offers[favoriteIndex].isFavorite,
-    };
+export const updateFavoriteData = (offers: Offer[], UpdateFavoriteId: number) => {
+  const favoriteIndex = offers.findIndex(offer => offer.id === UpdateFavoriteId);
+  offers[favoriteIndex] = {
+    ...offers[favoriteIndex],
+    isFavorite: !offers[favoriteIndex].isFavorite,
+  };
 
-    return offers;
+  return offers;
 };

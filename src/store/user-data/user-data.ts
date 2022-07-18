@@ -19,10 +19,10 @@ export const initialState: UserState = {
 const userData = createReducer(initialState, (builder) => {
   builder
     .addCase(actionCreator.changeAuthStatus, (state, action) => {
-      state.authorizationStatus = action.payload
+      state.authorizationStatus = action.payload;
     })
     .addCase(actionCreator.setUserData, (state, action) => {
-      state.userData = action.payload
+      state.userData = action.payload;
     });
 });
 

@@ -18,7 +18,7 @@ describe('async actions', () => {
     email: '343232@jklbnl.ru',
     avatarUrl: 'https://fakeurl.com/avatar/8.jpg',
     token: 'secret',
-  }
+  };
 
   const mockStore = configureMockStore<
     State,

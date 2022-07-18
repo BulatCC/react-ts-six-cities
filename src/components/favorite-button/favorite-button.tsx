@@ -33,11 +33,11 @@ function FavoriteButton({ props: { id, isFavorite }, style: { button, svg, svgWi
 
     const api = createApi();
     AuthorizationStatus.Auth && api.post(`${ApiRoute.Favorite}/${id}/${+!favoriteStatus}`)
-    .then(({data}) => {
-      dispatch(actionCreator.updateFavoriteId(id));
-      setFavoriteStatus(data.isFavorite);
-    });
-  }
+      .then(({ data }) => {
+        dispatch(actionCreator.updateFavoriteId(id));
+        setFavoriteStatus(data.isFavorite);
+      });
+  };
 
   return (
     <button onClick={handleFavoriteClick} className={`${button} button ${favoriteStatus ? `${button}--active` : ''}`} type="button" data-testid="favorite-button">

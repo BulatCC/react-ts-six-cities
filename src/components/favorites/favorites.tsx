@@ -55,7 +55,7 @@ function Favorites({ favoriteData }: FavoriteProps): JSX.Element {
   const handleCityClick = (city: string) => {
     dispatch(actionCreator.сhangeSelectedCity(city));
     navigate(AppRoute.Root);
-  }
+  };
 
   return (
     <main className="page__main page__main--favorites">
@@ -69,8 +69,9 @@ function Favorites({ favoriteData }: FavoriteProps): JSX.Element {
                   <div className="locations__item">
                     <a href="#" className={'locations__item-link'} onClick={(evt) => {
                       evt.preventDefault();
-                        handleCityClick(offer.cityName);
-                    }} data-testid="city">
+                      handleCityClick(offer.cityName);
+                    }} data-testid="city"
+                    >
                       <span>{offer.cityName}</span>
                     </a >
                   </div>

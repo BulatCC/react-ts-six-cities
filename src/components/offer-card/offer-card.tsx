@@ -33,13 +33,13 @@ function OfferCard({ offer: { isFavorite, isPremium, price, title, type, rating,
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <FavoriteButton
-           props={{id, isFavorite}}
-           style={{
-            button: 'place-card__bookmark-button',
-            svg: 'place-card__bookmark-icon',
-            svgWidth: 18,
-            svgHeight: 19,
-        }}/>
+            props={{ id, isFavorite }}
+            style={{
+              button: 'place-card__bookmark-button',
+              svg: 'place-card__bookmark-icon',
+              svgWidth: 18,
+              svgHeight: 19,
+            }} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

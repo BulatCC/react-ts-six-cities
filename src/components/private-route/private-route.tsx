@@ -12,13 +12,13 @@ function PrivateRoute({ privateElement }: JsxEl): JSX.Element {
   const authorizationStatus = useSelector((state: State): string => state.USER.authorizationStatus);
   switch (authorizationStatus) {
     case AuthorizationStatus.Unknown:
-      return <Loader />
+      return <Loader />;
     case AuthorizationStatus.Auth:
-      return privateElement
+      return privateElement;
     case AuthorizationStatus.NoAuth:
-      return <Navigate to={AppRoute.Login} />
+      return <Navigate to={AppRoute.Login} />;
     default:
-      return <Navigate to={AppRoute.Root} />
+      return <Navigate to={AppRoute.Root} />;
   }
 }
 

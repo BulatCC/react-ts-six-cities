@@ -45,16 +45,15 @@ describe('Reducer: appData', () => {
 
   test('should update favorite id', () => {
     const offers = new Array(FAKE_ARRAY_LENGTH).fill(mockOffer);
-    const state: AppData = {
+    const stateTest: AppData = {
       ...initialState,
       defaultOffers: offers,
     };
 
-    expect(appData(state, actionCreator.updateFavoriteId(FAKE_FAVORITE_ID)))
+    expect(appData(stateTest, actionCreator.updateFavoriteId(FAKE_FAVORITE_ID)))
       .toEqual({
-        ...state,
-        defaultOffers: state.defaultOffers = updateFavoriteData(state.defaultOffers, FAKE_FAVORITE_ID),
+        ...stateTest,
+        defaultOffers: stateTest.defaultOffers = updateFavoriteData(stateTest.defaultOffers, FAKE_FAVORITE_ID),
       });
   });
-})
-
+});

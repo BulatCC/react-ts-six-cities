@@ -8,7 +8,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { AuthorizationStatus } from '../../consts';
 
 function FakeMainPage() {
-  return <h1>Main page</h1>
+  return <h1>Main page</h1>;
 }
 
 const mockStore = configureMockStore();
@@ -27,17 +27,17 @@ const fakeAppFavoriteFalse = (component: JSX.Element) => {
     },
   });
 
-  return <Provider store={store}>
-    <MemoryRouter >
-      <>
+  return (
+    <Provider store={store}>
+      <MemoryRouter >
         {component}
-      </>
-      <Routes>
-        <Route path={AppRoute.Root} element={<FakeMainPage />} />
-      </Routes>
-    </MemoryRouter>
-  </Provider>
-}
+        <Routes>
+          <Route path={AppRoute.Root} element={<FakeMainPage />} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
+  );
+};
 
 const fakeAppFavoriteTrue = (component: JSX.Element) => {
   const store = mockStore({
@@ -53,26 +53,26 @@ const fakeAppFavoriteTrue = (component: JSX.Element) => {
     },
   });
 
-  return <Provider store={store}>
-    <MemoryRouter >
-      <>
+  return (
+    <Provider store={store}>
+      <MemoryRouter >
         {component}
-      </>
-      <Routes>
-        <Route path={AppRoute.Root} element={<FakeMainPage />} />
-      </Routes>
-    </MemoryRouter>
-  </Provider>
-}
+        <Routes>
+          <Route path={AppRoute.Root} element={<FakeMainPage />} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
+  );
+};
 
 describe('Component: FavoritePage', () => {
   test('should render correctly if nothing saved to favorites', () => {
-    render(fakeAppFavoriteFalse(<FavoritePage/>));
+    render(fakeAppFavoriteFalse(<FavoritePage />));
     expect(screen.getByText(/Nothing yet saved/i)).toBeInTheDocument();
   });
 
   test('should render correctly if saved in favorites', () => {
-    render(fakeAppFavoriteTrue(<FavoritePage/>));
+    render(fakeAppFavoriteTrue(<FavoritePage />));
     expect(screen.getByText(/Saved listing/i)).toBeInTheDocument();
   });
 });
